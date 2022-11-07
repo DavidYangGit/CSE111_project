@@ -73,7 +73,6 @@ CREATE TABLE Shows (
     s_genre CHAR(50) NOT NULL,
     s_releaseDate DATE,
     s_studio CHAR(50) NOT NULL,
-    s_actor CHAR(50) NOT NULL,
     s_director CHAR(50) NOT NULL,
     s_showid INTEGER
 );
@@ -98,6 +97,12 @@ CREATE TABLE Studios (
     s_address CHAR(50) NOT NULL
 );
 
+Create Table Watchlist (
+    w_username CHAR(50) NOT NULL,
+    w_movieid INTEGER,
+    w_showid INTEGER
+);
+
 --Following Will Populate Tables
 --INSERT INTO User VALUES('Name', 'Username', Age, 'Plan');
 INSERT INTO User VALUES('Omar', 'Kidy101', 24, 'Premium');
@@ -120,10 +125,22 @@ INSERT INTO Subscription VALUES('Premium', 19.99, 4, 'Ultra HD');
 INSERT INTO Movies VALUES('Forrest Gump', 'Drama/Romance', '1996-07-06', 'Paramount', 'Robert Zemeckis', 1);
 INSERT INTO Movies VALUES('Shrek 2', 'Comedy/Fantasy', '2004-05-19', 'Dreamworks', 'Andrew Adamson', 2);
 INSERT INTO Movies VALUES('Toy Story', 'Comedy/Family', '1995-11-19', 'Pixar', 'John Lasseter', 3);
+INSERT INTO Movies VALUES('Star Wars: Episode III - Revenge of the Sith', 'Adventure/Fantasy/Sci-Fi/Action', '2005-05-19', 'Lucasfilm', 'George Lucas', 4);
+INSERT INTO Movies VALUES('Toy Story 2', 'Comedy/Family', '1999-11-24', 'Pixar', 'John Lasseter', 5);
+
+--INSERT INTO Shows VALUES('Title', 'Genre', 'ReleaseDate', 'Studio', 'Director', showid);
+INSERT INTO Shows VALUES('Stranger Things', 'Sci-Fi/Thriller', '2016-07-15', 'Netflix', 'Shawn Levy', 1);
+INSERT INTO Shows VALUES('The Mandalorian', 'Sci-Fi/Action/Adventure', '2019-11-12', 'Lucasfilm', 'Dave Filoni', 2);
+INSERT INTO Shows VALUES('The Book of Boba Fett', 'Sci-Fi/Action/Adventure', '2021-12-29', 'Lucasfilm', 'Jon Favreau', 3);
+INSERT INTO Shows VALUES('Narcos: Mexico', 'Crime/Drama', '2018-11-16', 'Netflix', 'Andi Baiz', 4);
+INSERT INTO Shows VALUES('Narcos', 'Crime/Drama', '2015-08-28', 'Netflix', 'José Padilha', 5);
 
 
---INSERT INTO Actors VALUES(AcrorName, Actorid)
-INSERT INTO Actors VALUES('Tom Hanks', 1);--Forset Gump
+
+
+
+--INSERT INTO Actors VALUES(ActorName, Actorid)
+INSERT INTO Actors VALUES('Tom Hanks', 1);--Forrest Gump
 INSERT INTO Actors VALUES('Robert Wright', 2);
 INSERT INTO Actors VALUES('Gary Sinise', 3);
 INSERT INTO Actors VALUES('Mykelti Williamson', 4);
@@ -145,9 +162,66 @@ INSERT INTO Actors VALUES('John Ratzenberger', 18);
 INSERT INTO Actors VALUES('Annie Potts', 19);
 INSERT INTO Actors VALUES('John Morris', 20);
 INSERT INTO Actors VALUES('Erik von Detten', 21);
+INSERT INTO Actors VALUES('Ewan McGregor', 22);--Star Wars Episode 3
+INSERT INTO Actors VALUES('Natalie Portman', 23);
+INSERT INTO Actors VALUES('Hayden Christensen', 24);
+INSERT INTO Actors VALUES('Ian McDiarmid', 25);
+INSERT INTO Actors VALUES('Samuel L. Jackson', 26);
+INSERT INTO Actors VALUES('Christopher Lee', 27);
+INSERT INTO Actors VALUES('Anthony Daniels', 28);
+INSERT INTO Actors VALUES('Kenny Baker', 29);
+INSERT INTO Actors VALUES('Frank Oz', 30);
+--INSERT INTO Actors VALUES('Tom Hanks', 1);--Toy Story 2
+--INSERT INTO Actors VALUES('Tim Allen', 14);
+INSERT INTO Actors VALUES('Winona Ryder', 31);--Stranger Things
+INSERT INTO Actors VALUES('David Harbour', 32);
+INSERT INTO Actors VALUES('Finn Wolfhard', 33);
+INSERT INTO Actors VALUES('Millie Bobby Brown', 34);
+INSERT INTO Actors VALUES('Gaten Matarazzo', 35);
+INSERT INTO Actors VALUES('Caleb McLaughlin', 36);
+INSERT INTO Actors VALUES('Natalia Dyer', 37);
+INSERT INTO Actors VALUES('Charlie Heaton', 38);
+INSERT INTO Actors VALUES('Cara Buono', 39);
+INSERT INTO Actors VALUES('Matthew Modine', 40);
+INSERT INTO Actors VALUES('Noah Schnapp', 41);
+INSERT INTO Actors VALUES('Sadie Sink', 42);
+INSERT INTO Actors VALUES('Joe Keery', 43);
+INSERT INTO Actors VALUES('Dacre Montgomery', 44);
+INSERT INTO Actors VALUES('Sean Astin', 45);
+INSERT INTO Actors VALUES('Paul Reiser', 46);
+INSERT INTO Actors VALUES('Maya Hawke', 47);
+INSERT INTO Actors VALUES('Priah Ferguson', 48);
+INSERT INTO Actors VALUES('Brett Gellam', 49);
+INSERT INTO Actors VALUES('Pedro Pascal', 50);--The Mandalorian
+INSERT INTO Actors VALUES('Carl Weathers', 51);
+INSERT INTO Actors VALUES('Giancarlo Esposito', 52);
+INSERT INTO Actors VALUES('Gina Carano', 53);
+INSERT INTO Actors VALUES('Temuera Morrison', 54);
+INSERT INTO Actors VALUES('Ming-Na Wen', 55);
+INSERT INTO Actors VALUES('Emily Swallow', 56);
+INSERT INTO Actors VALUES('Rosario Dawson', 57);
+INSERT INTO Actors VALUES('Diego Luna', 58);--Narcos:Mexico
+INSERT INTO Actors VALUES('Micheal Pena', 59);
+INSERT INTO Actors VALUES('Teresa Ruiz', 60);
+INSERT INTO Actors VALUES('Tencho Huerta', 61);
+INSERT INTO Actors VALUES('Alejandro Eda', 62);
+--INSERT INTO Actors VALUES('Pedro Pascal', 50);--Narcos
+INSERT INTO Actors VALUES('Wagner Mora', 63);
+INSERT INTO Actors VALUES('Boyd Holbrook', 64);
+INSERT INTO Actors VALUES('Alberto Ammann', 65);
+INSERT INTO Actors VALUES('Paulina Gaitán', 66);
+INSERT INTO Actors VALUES('Damián Alcázar', 67);
+INSERT INTO Actors VALUES('Francisco Denis', 68);
 
 
---INSERT INTO MovieActors VALUES(movieid, actorName, actorid)
+
+
+
+
+
+
+
+--INSERT INTO MovieActors VALUES(movieid, actorid)
 INSERT INTO MovieActors VALUES(1, 1);--Forrest Gump
 INSERT INTO MovieActors VALUES(1, 2);
 INSERT INTO MovieActors VALUES(1, 3);
@@ -170,6 +244,77 @@ INSERT INTO MovieActors VALUES(3, 18);
 INSERT INTO MovieActors VALUES(3, 19);
 INSERT INTO MovieActors VALUES(3, 20);
 INSERT INTO MovieActors VALUES(3, 21);
+INSERT INTO MovieActors VALUES(4, 22);--Star Wars Episode 3
+INSERT INTO MovieActors VALUES(4, 23);
+INSERT INTO MovieActors VALUES(4, 24);
+INSERT INTO MovieActors VALUES(4, 25);
+INSERT INTO MovieActors VALUES(4, 26);
+INSERT INTO MovieActors VALUES(4, 27);
+INSERT INTO MovieActors VALUES(4, 28);
+INSERT INTO MovieActors VALUES(4, 29);
+INSERT INTO MovieActors VALUES(4, 30);
+INSERT INTO MovieActors VALUES(5, 1);--Toy Story 2
+INSERT INTO MovieActors VALUES(5, 14);
+
+--INSERT INTO MovieActors VALUES(showeid, actorid)
+INSERT INTO ShowActors VALUES(1, 31);--Stranger Things
+INSERT INTO ShowActors VALUES(1, 32);
+INSERT INTO ShowActors VALUES(1, 33);
+INSERT INTO ShowActors VALUES(1, 34);
+INSERT INTO ShowActors VALUES(1, 35);
+INSERT INTO ShowActors VALUES(1, 36);
+INSERT INTO ShowActors VALUES(1, 37);
+INSERT INTO ShowActors VALUES(1, 38);
+INSERT INTO ShowActors VALUES(1, 39);
+INSERT INTO ShowActors VALUES(1, 40);
+INSERT INTO ShowActors VALUES(1, 41);
+INSERT INTO ShowActors VALUES(1, 42);
+INSERT INTO ShowActors VALUES(1, 43);
+INSERT INTO ShowActors VALUES(1, 44);
+INSERT INTO ShowActors VALUES(1, 45);
+INSERT INTO ShowActors VALUES(1, 46);
+INSERT INTO ShowActors VALUES(1, 47);
+INSERT INTO ShowActors VALUES(1, 48);
+INSERT INTO ShowActors VALUES(1, 49);
+INSERT INTO ShowActors VALUES(2, 50);--The Mandalorian
+INSERT INTO ShowActors VALUES(2, 51);
+INSERT INTO ShowActors VALUES(2, 52);
+INSERT INTO ShowActors VALUES(2, 53);
+INSERT INTO ShowActors VALUES(2, 54);
+INSERT INTO ShowActors VALUES(2, 55);
+INSERT INTO ShowActors VALUES(2, 56);
+INSERT INTO ShowActors VALUES(2, 57);
+INSERT INTO ShowActors VALUES(3, 50);--The Book of Boba Fett
+INSERT INTO ShowActors VALUES(3, 54);
+INSERT INTO ShowActors VALUES(3, 55);
+INSERT INTO ShowActors VALUES(4, 58);--Narcos:Mexico
+INSERT INTO ShowActors VALUES(4, 59);
+INSERT INTO ShowActors VALUES(4, 60);
+INSERT INTO ShowActors VALUES(4, 61);
+INSERT INTO ShowActors VALUES(4, 62);
+INSERT INTO ShowActors VALUES(5, 50);--Narcos
+INSERT INTO ShowActors VALUES(5, 63);
+INSERT INTO ShowActors VALUES(5, 64);
+INSERT INTO ShowActors VALUES(5, 65);
+INSERT INTO ShowActors VALUES(5, 66);
+INSERT INTO ShowActors VALUES(5, 67);
+INSERT INTO ShowActors VALUES(5, 68);
+
+--INSERT INTO Watchlist VALUES('username', movieid, showid);
+INSERT INTO Watchlist VALUES('Kidy101', 2, NULL);
+INSERT INTO Watchlist VALUES('Kidy101', NULL, 2);
+INSERT INTO Watchlist VALUES('Kidy101', NULL, 3);
+INSERT INTO Watchlist VALUES('Kidy101', 4, NULL);
+INSERT INTO Watchlist VALUES('pumagod', 1, NULL);
+INSERT INTO Watchlist VALUES('pumagod', 2, NULL);
+INSERT INTO Watchlist VALUES('pumagod', 4, NULL);
+
+
+
+
+
+
+
 
 
 
@@ -186,3 +331,25 @@ FROM Actors, MovieActors, Movies
 WHERE a_actorid = ma_actorid
 AND m_movieid = ma_movieid
 AND m_movieid = 2;
+
+--What movies does Tom Hanks star in
+Select m_title
+From Movies, Actors, MovieActors
+WHERE a_actorid = ma_actorid
+AND m_movieid = ma_movieid
+AND a_actorname = 'Tom Hanks';
+
+
+--What shows has user 'Kidy101' added to their watchlist
+Select s_title
+From Shows, User, Watchlist
+WHERE s_showid = w_showid
+AND u_username = w_username
+AND u_username = 'Kidy101';
+
+--What Movies has user 'pumagod' added to their watchlist
+Select m_title
+From Movies, User, Watchlist
+WHERE m_movieid = w_movieid
+AND u_username = w_username
+AND u_username = 'pumagod';
