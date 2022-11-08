@@ -463,15 +463,34 @@ AND u_username = 'pumagod'
 AND m_releaseDate < '2005-01-01';
 
 --12. What movies and shows have been released after the year 2000, have been added to Kidy101's watchlist, and have less than 9 actors?
-SELECT m_title, s_title
-FROM Movies, Shows, User, Watchlist, ShowActors, MovieActors
+-- SELECT m_title, s_title
+-- FROM Movies, Shows, User, Watchlist, ShowActors, MovieActors
+-- WHERE m_movieid = w_movieid
+-- AND u_username = w_username
+-- AND u_username = 'Kidy101'
+-- AND m_releaseDate > '1999-12-12'
+-- AND s_releaseDate > '1999-12-12'
+-- GROUP BY m_title, s_title
+-- HAVING COUNT(ma_actorid) <= 8 AND COUNT(sa_actorid) <= 8;
+
+SELECT m_title
+FROM Movies, User, MovieActors, Watchlist
 WHERE m_movieid = w_movieid
 AND u_username = w_username
 AND u_username = 'Kidy101'
 AND m_releaseDate > '1999-12-12'
+GROUP BY m_title
+HAVING COUNT(ma_actorid) <= 8
+UNION
+SELECT s_title
+FROM Shows, User, ShowActors, Watchlist
+WHERE m_movieid = w_movieid
+AND u_username = w_username
+AND u_username = 'Kidy101'
 AND s_releaseDate > '1999-12-12'
-GROUP BY m_title, s_title
-HAVING COUNT(ma_actorid) <= 8 AND COUNT(sa_actorid) <= 8;
+GROUP BY s_title
+HAVING COUNT(sa_actorid) <= 8
+
 
 --13. How many movies are on both of the watchlists of users pumagod and Kidy101?
 SELECT m_title
@@ -479,6 +498,11 @@ FROM Movies, User, Watchlist
 WHERE m_movieid = w_movieid
 AND u_username = w_username
 AND u_username = 'pumagod'
+INTERSECT
+SELECT m_title
+FROM Movies, User, Watchlist
+WHERE m_movieid = w_movieid
+AND u_username = w_username
 AND u_username = 'Kidy101';
 
 --14. What movies are made by Pixar, are comedies, and feature Tom Hanks?
@@ -492,3 +516,5 @@ AND ma_actorid = a_actorid
 AND a_actorname LIKE '%Tom Hanks'
 AND g_name LIKE '%Comedy'
 AND m_studio LIKE '%Pixar';
+
+--15. 
