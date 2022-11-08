@@ -123,6 +123,3 @@ INSERT INTO MovieActors VALUES (6,72);
 INSERT INTO MovieActors VALUES (6,73);
 INSERT INTO MovieActors VALUES (6,74);
 INSERT INTO MovieActors VALUES (6,9);
-
-
-
