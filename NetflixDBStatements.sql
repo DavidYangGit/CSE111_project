@@ -97,7 +97,7 @@ HAVING COUNT(ma_actorid) <= 8
 UNION
 SELECT s_title
 FROM Shows, User, ShowActors, Watchlist
-WHERE m_movieid = w_movieid
+WHERE s_showid = w_showid
 AND u_username = w_username
 AND u_username = 'Kidy101'
 AND s_releaseDate > '1999-12-12'
@@ -120,7 +120,7 @@ AND u_username = 'Kidy101';
 
 --13. What movies are made by Pixar, are comedies, and feature Tom Hanks?
 SELECT m_title
-FROM Movies, Actors, MovieActors
+FROM Movies, Actors, MovieActors, MovieGenres, Genre
 WHERE m_movieid = ma_movieid
 AND mg_movieid = m_movieid
 AND ma_movieid = mg_movieid
@@ -145,13 +145,32 @@ AND sg_genreid = g_genreid
 AND g_name = 'Sci-Fi';
 
 --16. What other actors besides Tom Hanks have been in movies directed by John Lasseter?
-SELECT a_actorname EXCEPT 'Tom Hanks'
+SELECT a_actorname
 FROM Movies, MovieActors, Actors
 WHERE m_movieid = ma_movieid
 AND ma_actorid = a_actorid
-AND m_director = 'John Lasseter';
+AND m_director = 'John Lasseter'
+EXCEPT
+SELECT a_actorname
+FROM Movies, MovieActors, Actors
+WHERE m_movieid = ma_movieid
+AND ma_actorid = a_actorid
+AND m_director = 'John Lasseter'
+AND a_actorname = 'Tom Hanks';
 
---17. 
+--17. How many shows are produced by Lucasfilm?
+SELECT COUNT(*)
+FROM (
+	SELECT s_title
+	FROM Shows
+	WHERE s_studio = 'Lucasfilm');
+
+--18. What movies are on more than one user's watchlist?
+SELECT m_title
+FROM Movies, Watchlist
+WHERE m_movieid = w_movieid
+GROUP BY m_title
+HAVING COUNT(w_movieid) > 1;  
 
 --Detete user 'savagecat' because he deactivated his account
 DELETE FROM User
