@@ -375,6 +375,8 @@ INSERT INTO Watchlist VALUES('Kidy101', 4, NULL);
 INSERT INTO Watchlist VALUES('pumagod', 1, NULL);
 INSERT INTO Watchlist VALUES('pumagod', 2, NULL);
 INSERT INTO Watchlist VALUES('pumagod', 4, NULL);
+INSERT INTO Watchlist VALUES('pumagod', NULL, 1);
+
 
 
 
@@ -436,10 +438,16 @@ WHERE s_showid = w_showid
 AND u_username = w_username
 AND u_username = 'Kidy101';
 
---What Movies has user 'pumagod' added to their watchlist
+--What Movies and Shows has user 'pumagod' added to their watchlist
 Select m_title
 From Movies, User, Watchlist
 WHERE m_movieid = w_movieid
+AND u_username = w_username
+AND u_username = 'pumagod'
+UNION
+Select s_title
+From Shows, User, Watchlist
+WHERE s_showid = w_showid
 AND u_username = w_username
 AND u_username = 'pumagod';
 
