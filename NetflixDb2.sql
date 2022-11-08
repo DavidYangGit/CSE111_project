@@ -1,5 +1,6 @@
 -- SQLite
 
+--Drop Table erases content from tables.
 DROP TABLE User;
 DROP TABLE Subscription;
 DROP TABLE Movies;
@@ -13,6 +14,7 @@ DROP TABLE ShowActors;
 DROP TABLE Studios;
 DROP TABLE Genre;
 DROP TABLE MovieGenres;
+DROP TABLE ShowGenres;
 
 --Following Creates Tables
 CREATE TABLE User (
@@ -52,7 +54,7 @@ CREATE TABLE Watchlist (
 
 CREATE TABLE Movies (
     m_title CHAR(50) NOT NULL,
-    m_genre CHAR(50) NOT NULL,
+    --m_genre CHAR(50) NOT NULL,
     m_releaseDate DATE,
     m_studio CHAR(50) NOT NULL,
     --m_actor CHAR(50) NOT NULL, more than one actor will be needed
@@ -72,7 +74,7 @@ CREATE TABLE ShowActors (
 
 CREATE TABLE Shows (
     s_title CHAR(50) NOT NULL,
-    s_genre CHAR(50) NOT NULL,
+    --s_genre CHAR(50) NOT NULL,
     s_releaseDate DATE,
     s_studio CHAR(50) NOT NULL,
     s_director CHAR(50) NOT NULL,
@@ -106,13 +108,18 @@ Create Table Watchlist (
 );
 
 Create Table Genre (
-    g_id INTEGER,
+    g_genreid INTEGER,
     g_name CHAR(50) NOT NULL
 );
 
 Create Table MovieGenres (
-    mg_id INTEGER,
+    mg_genreid INTEGER,
     mg_movieid INTEGER
+);
+
+Create Table ShowGenres (
+    sg_genreid INTEGER,
+    sg_showid INTEGER
 );
 
 --Following Will Populate Tables
@@ -129,22 +136,36 @@ INSERT INTO Genre VALUES(8,'Historical');
 INSERT INTO Genre VALUES(9,'Horror');
 INSERT INTO Genre VALUES(10,'Romance');
 INSERT INTO Genre VALUES(11,'Sci-Fi');
+INSERT INTO Genre VALUES(12,'Thriller');
+
 
 --Insert Into MovieGenres VALUES(genre id, movie id);
 INSERT INTO MovieGenres VALUES(5, 1);--Forrest Gump
 INSERT INTO MovieGenres VALUES(10, 1);
-INSERT INTO MovieGenres VALUES(3, 2);
+INSERT INTO MovieGenres VALUES(3, 2);--Shrek 2
 INSERT INTO MovieGenres VALUES(7, 2);
-INSERT INTO MovieGenres VALUES(3, 3);
+INSERT INTO MovieGenres VALUES(3, 3);--Toy Story
 INSERT INTO MovieGenres VALUES(6, 3);
-INSERT INTO MovieGenres VALUES(1, 4);
+INSERT INTO MovieGenres VALUES(1, 4);--Star Wars Episode 3
 INSERT INTO MovieGenres VALUES(2, 4);
 INSERT INTO MovieGenres VALUES(7, 4);
 INSERT INTO MovieGenres VALUES(11, 4);
-INSERT INTO MovieGenres VALUES(3, 5);
+INSERT INTO MovieGenres VALUES(3, 5);--Toy Story 2
 INSERT INTO MovieGenres VALUES(6, 5);
 
-
+--Insert Into ShowGenres VALUES(genre id, movie id);
+INSERT INTO ShowGenres VALUES(11,1);--Stranger Things
+INSERT INTO ShowGenres VALUES(12,1);
+INSERT INTO ShowGenres VALUES(11,2);--The Mandalorian
+INSERT INTO ShowGenres VALUES(1,2);
+INSERT INTO ShowGenres VALUES(2,2);
+INSERT INTO ShowGenres VALUES(11,3);--The Book of Boba Fett
+INSERT INTO ShowGenres VALUES(1,3);
+INSERT INTO ShowGenres VALUES(2,3);
+INSERT INTO ShowGenres VALUES(4,4);--Narcos: Mexico
+INSERT INTO ShowGenres VALUES(5,4);
+INSERT INTO ShowGenres VALUES(4,5);--Narcos
+INSERT INTO ShowGenres VALUES(5,5);
 
 
 
@@ -368,8 +389,24 @@ INSERT INTO Watchlist VALUES('pumagod', 4, NULL);
 
 --What Movies are comedies
 Select m_title
-From Movies
-Where m_genre LIKE '%Comedy%';
+From Movies, Genre, MovieGenres
+Where m_movieid = mg_movieid
+AND g_genreid = mg_genreid
+AND mg_genreid = 3;
+
+--What Shows are both Action and Sci-Fi
+select s_title
+from Shows, Genre, ShowGenres
+where s_showid = sg_showid
+and g_genreid = sg_showid
+and sg_genreid = 1
+INTERSECT
+select s_title
+from Shows, Genre, ShowGenres
+where s_showid = sg_showid
+and g_genreid = sg_showid
+and sg_genreid = 11;
+
 
 --What Actors are in Shrek 2
 Select a_actorname
