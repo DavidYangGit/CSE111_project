@@ -46,11 +46,11 @@ CREATE TABLE viewHistory (
     vh_showid INTEGER
 );
 
-CREATE TABLE Watchlist (
-    w_username CHAR(50) PRIMARY KEY
-    w_movieid INTEGER,
-    w_showid INTEGER
-);
+-- CREATE TABLE Watchlist (
+--     w_username CHAR(50) PRIMARY KEY
+--     w_movieid INTEGER,
+--     w_showid INTEGER
+-- );
 
 CREATE TABLE Movies (
     m_title CHAR(50) NOT NULL,
@@ -81,25 +81,21 @@ CREATE TABLE Shows (
     s_showid INTEGER
 );
 
-CREATE TABLE Directors (
-    d_director CHAR(50) NOT NULL,
-    d_age INTEGER
-);
 
-CREATE TABLE Directors (
-    d_directorname CHAR(50) NOT NULL,
-    d_directorid INTEGER
-);
+-- CREATE TABLE Directors (
+--     d_directorname CHAR(50) NOT NULL,
+--     d_directorid INTEGER
+-- );
 
 CREATE TABLE Actors (
     a_actorname CHAR(50) NOT NULL,
     a_actorid INTEGER
 );
 
-CREATE TABLE Studios (
-    s_studio CHAR(50) NOT NULL,
-    s_address CHAR(50) NOT NULL
-);
+-- CREATE TABLE Studios (
+--     s_studio CHAR(50) NOT NULL,
+--     s_address CHAR(50) NOT NULL
+-- );
 
 Create Table Watchlist (
     w_username CHAR(50) NOT NULL,
