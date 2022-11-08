@@ -422,6 +422,12 @@ WHERE a_actorid = ma_actorid
 AND m_movieid = ma_movieid
 AND a_actorname = 'Tom Hanks';
 
+--What movies does Pedro Pascal star in
+Select s_title
+From Shows, Actors, MovieActors
+WHERE a_actorid = sa_actorid
+AND s_showid = sa_showid
+AND a_actorname = 'Pedro Pascal';
 
 --What shows has user 'Kidy101' added to their watchlist
 Select s_title
