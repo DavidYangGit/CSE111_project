@@ -69,8 +69,11 @@ From Subscription, User
 Where u_plan = sub_plan
 And u_username = 'Hetrotan';
 
---Delete From user 'pumagod's Watchlist 
+--Detete user 'savagecat' because he deactivated his account
+DELETE FROM User
+WHERE u_username = 'savagecat';
 
+--Delete From user 'pumagod's Watchlist 
 DELETE FROM Watchlist
 WHERE w_username = 'pumagod'
 AND w_movieid = 4;
