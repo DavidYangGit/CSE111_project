@@ -7,11 +7,9 @@ DROP TABLE Movies;
 DROP TABLE Shows;
 DROP TABLE viewHistory;
 DROP TABLE Watchlist;
-DROP TABLE Directors;
 DROP TABLE Actors;
 DROP TABLE MovieActors;
 DROP TABLE ShowActors;
-DROP TABLE Studios;
 DROP TABLE Genre;
 DROP TABLE MovieGenres;
 DROP TABLE ShowGenres;
@@ -41,7 +39,7 @@ CREATE TABLE Subscription (
 );
 
 CREATE TABLE viewHistory (
-    vh_username CHAR(50) PRIMARY KEY
+    vh_username CHAR(50) PRIMARY KEY,
     vh_movieid INTEGER,
     vh_showid INTEGER
 );
@@ -374,25 +372,16 @@ INSERT INTO Watchlist VALUES('pumagod', 4, NULL);
 INSERT INTO Watchlist VALUES('pumagod', NULL, 1);
 
 
-
-
-
-
-
-
-
-
-
 --SQL Statements
 
---What Movies are comedies
+--1. What Movies are comedies
 Select m_title
 From Movies, Genre, MovieGenres
 Where m_movieid = mg_movieid
 AND g_genreid = mg_genreid
 AND mg_genreid = 3;
 
---What Shows are both Action and Sci-Fi
+--2. What Shows are both Action and Sci-Fi
 select s_title
 from Shows, Genre, ShowGenres
 where s_showid = sg_showid
@@ -405,36 +394,35 @@ where s_showid = sg_showid
 and g_genreid = sg_showid
 and sg_genreid = 11;
 
-
---What Actors are in Shrek 2
+--3. What Actors are in Shrek 2
 Select a_actorname
 FROM Actors, MovieActors, Movies
 WHERE a_actorid = ma_actorid
 AND m_movieid = ma_movieid
 AND m_movieid = 2;
 
---What movies does Tom Hanks star in
+--4. What movies does Tom Hanks star in
 Select m_title
 From Movies, Actors, MovieActors
 WHERE a_actorid = ma_actorid
 AND m_movieid = ma_movieid
 AND a_actorname = 'Tom Hanks';
 
---What movies does Pedro Pascal star in
+--5. What movies does Pedro Pascal star in
 Select s_title
 From Shows, Actors, ShowActors
 WHERE a_actorid = sa_actorid
 AND s_showid = sa_showid
 AND a_actorname = 'Pedro Pascal';
 
---What shows has user 'Kidy101' added to their watchlist
+--6. What shows has user 'Kidy101' added to their watchlist
 Select s_title
 From Shows, User, Watchlist
 WHERE s_showid = w_showid
 AND u_username = w_username
 AND u_username = 'Kidy101';
 
---What Movies and Shows has user 'pumagod' added to their watchlist
+--7. What Movies and Shows has user 'pumagod' added to their watchlist
 Select m_title
 From Movies, User, Watchlist
 WHERE m_movieid = w_movieid
@@ -447,19 +435,18 @@ WHERE s_showid = w_showid
 AND u_username = w_username
 AND u_username = 'pumagod';
 
---What plan does user 'Hetrotan' have
+--8. What plan does user 'Hetrotan' have
 Select u_plan
 From User
 Where u_username = 'Hetrotan';
 
---What does Hetrotans plan include
-
+--9. What does Hetrotans plan include
 Select sub_plan, sub_price, sub_maxviewers, sub_resolution
 From Subscription, User
 Where u_plan = sub_plan
 And u_username = 'Hetrotan';
 
---What shows have more than 7 actors?
+--10. What shows have more than 7 actors?
 SELECT DISTINCT s_title
 FROM Shows, Actors, ShowActors
 WHERE s_showid = sa_showid
@@ -467,7 +454,7 @@ AND sa_actorid = a_actorid
 GROUP BY s_title
 HAVING COUNT(sa_actorid) > 6;
 
---What movies has user 'pumagod' added to their watchlist that have been released before the year 2005?
+--11. What movies has user 'pumagod' added to their watchlist that have been released before the year 2005?
 SELECT m_title
 FROM Movies, User, Watchlist
 WHERE m_movieid = w_movieid
@@ -475,7 +462,7 @@ AND u_username = w_username
 AND u_username = 'pumagod'
 AND m_releaseDate < '2005-01-01';
 
---What movies and shows have been released after the year 2000, have been added to Kidy101's watchlist, and have less than 9 actors?
+--12. What movies and shows have been released after the year 2000, have been added to Kidy101's watchlist, and have less than 9 actors?
 SELECT m_title, s_title
 FROM Movies, Shows, User, Watchlist, ShowActors, MovieActors
 WHERE m_movieid = w_movieid
@@ -486,7 +473,7 @@ AND s_releaseDate > '1999-12-12'
 GROUP BY m_title, s_title
 HAVING COUNT(ma_actorid) <= 8 AND COUNT(sa_actorid) <= 8;
 
---How many movies are on both of the watchlists of users pumagod and Kidy101?
+--13. How many movies are on both of the watchlists of users pumagod and Kidy101?
 SELECT m_title
 FROM Movies, User, Watchlist
 WHERE m_movieid = w_movieid
@@ -494,10 +481,14 @@ AND u_username = w_username
 AND u_username = 'pumagod'
 AND u_username = 'Kidy101';
 
---What movies are made by Pixar, are comedies, and feature Tom Hanks?
+--14. What movies are made by Pixar, are comedies, and feature Tom Hanks?
 SELECT m_title
 FROM Movies, Actors, MovieActors
 WHERE m_movieid = ma_movieid
+AND mg_movieid = m_movieid
+AND ma_movieid = mg_movieid
+AND mg_genreid = g_genreid
 AND ma_actorid = a_actorid
-AND a_actorname LIKE "%Tom Hanks"
-AND m_
+AND a_actorname LIKE '%Tom Hanks'
+AND g_name LIKE '%Comedy'
+AND m_studio LIKE '%Pixar';
