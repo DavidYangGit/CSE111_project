@@ -1,5 +1,6 @@
 -- SQLite
 
+--Drop Table erases content from tables.
 DROP TABLE User;
 DROP TABLE Subscription;
 DROP TABLE Movies;
@@ -11,6 +12,9 @@ DROP TABLE Actors;
 DROP TABLE MovieActors;
 DROP TABLE ShowActors;
 DROP TABLE Studios;
+DROP TABLE Genre;
+DROP TABLE MovieGenres;
+DROP TABLE ShowGenres;
 
 --Following Creates Tables
 CREATE TABLE User (
@@ -42,15 +46,15 @@ CREATE TABLE viewHistory (
     vh_showid INTEGER
 );
 
-CREATE TABLE Watchlist (
-    w_username CHAR(50) PRIMARY KEY,
-    w_movieid INTEGER,
-    w_showid INTEGER
-);
+-- CREATE TABLE Watchlist (
+--     w_username CHAR(50) PRIMARY KEY,
+--     w_movieid INTEGER,
+--     w_showid INTEGER
+-- );
 
 CREATE TABLE Movies (
     m_title CHAR(50) NOT NULL,
-    m_genre CHAR(50) NOT NULL,
+    --m_genre CHAR(50) NOT NULL,
     m_releaseDate DATE,
     m_studio CHAR(50) NOT NULL,
     --m_actor CHAR(50) NOT NULL, more than one actor will be needed
@@ -70,16 +74,20 @@ CREATE TABLE ShowActors (
 
 CREATE TABLE Shows (
     s_title CHAR(50) NOT NULL,
-    s_genre CHAR(50) NOT NULL,
+    --s_genre CHAR(50) NOT NULL,
     s_releaseDate DATE,
     s_studio CHAR(50) NOT NULL,
     s_director CHAR(50) NOT NULL,
     s_showid INTEGER
 );
 
+-- CREATE TABLE Directors (
+--     d_director CHAR(50) NOT NULL,
+--     d_age INTEGER
+-- );
+
 CREATE TABLE Directors (
-    d_director CHAR(50) NOT NULL,
-    d_age INTEGER
+    d_directorname CHAR(50) NOT NULL,
     d_directorid INTEGER
 );
 
@@ -93,7 +101,76 @@ CREATE TABLE Studios (
     s_address CHAR(50) NOT NULL
 );
 
+Create Table Watchlist (
+    w_username CHAR(50) NOT NULL,
+    w_movieid INTEGER,
+    w_showid INTEGER
+);
+
+Create Table Genre (
+    g_genreid INTEGER,
+    g_name CHAR(50) NOT NULL
+);
+
+Create Table MovieGenres (
+    mg_genreid INTEGER,
+    mg_movieid INTEGER
+);
+
+Create Table ShowGenres (
+    sg_genreid INTEGER,
+    sg_showid INTEGER
+);
+
 --Following Will Populate Tables
+
+--INSERT INTO Genres VALUES(genre id, 'genre name');
+INSERT INTO Genre VALUES(1,'Action');
+INSERT INTO Genre VALUES(2,'Adventure');
+INSERT INTO Genre VALUES(3,'Comedy');
+INSERT INTO Genre VALUES(4,'Crime');
+INSERT INTO Genre VALUES(5,'Drama');
+INSERT INTO Genre VALUES(6,'Family');
+INSERT INTO Genre VALUES(7,'Fantasy');
+INSERT INTO Genre VALUES(8,'Historical');
+INSERT INTO Genre VALUES(9,'Horror');
+INSERT INTO Genre VALUES(10,'Romance');
+INSERT INTO Genre VALUES(11,'Sci-Fi');
+INSERT INTO Genre VALUES(12,'Thriller');
+
+
+--Insert Into MovieGenres VALUES(genre id, movie id);
+INSERT INTO MovieGenres VALUES(5, 1);--Forrest Gump
+INSERT INTO MovieGenres VALUES(10, 1);
+INSERT INTO MovieGenres VALUES(3, 2);--Shrek 2
+INSERT INTO MovieGenres VALUES(7, 2);
+INSERT INTO MovieGenres VALUES(3, 3);--Toy Story
+INSERT INTO MovieGenres VALUES(6, 3);
+INSERT INTO MovieGenres VALUES(1, 4);--Star Wars Episode 3
+INSERT INTO MovieGenres VALUES(2, 4);
+INSERT INTO MovieGenres VALUES(7, 4);
+INSERT INTO MovieGenres VALUES(11, 4);
+INSERT INTO MovieGenres VALUES(3, 5);--Toy Story 2
+INSERT INTO MovieGenres VALUES(6, 5);
+
+--Insert Into ShowGenres VALUES(genre id, movie id);
+INSERT INTO ShowGenres VALUES(11,1);--Stranger Things
+INSERT INTO ShowGenres VALUES(12,1);
+INSERT INTO ShowGenres VALUES(11,2);--The Mandalorian
+INSERT INTO ShowGenres VALUES(1,2);
+INSERT INTO ShowGenres VALUES(2,2);
+INSERT INTO ShowGenres VALUES(11,3);--The Book of Boba Fett
+INSERT INTO ShowGenres VALUES(1,3);
+INSERT INTO ShowGenres VALUES(2,3);
+INSERT INTO ShowGenres VALUES(4,4);--Narcos: Mexico
+INSERT INTO ShowGenres VALUES(5,4);
+INSERT INTO ShowGenres VALUES(4,5);--Narcos
+INSERT INTO ShowGenres VALUES(5,5);
+
+
+
+
+
 --INSERT INTO User VALUES('Name', 'Username', Age, 'Plan');
 INSERT INTO User VALUES('Omar', 'Kidy101', 24, 'Premium');
 INSERT INTO User VALUES('David', 'DYang', 24, 'Premium');
@@ -111,19 +188,19 @@ INSERT INTO Subscription VALUES('Basic', 9.99, 1, 'HD');
 INSERT INTO Subscription VALUES('Standard', 15.49, 2, 'Full HD');
 INSERT INTO Subscription VALUES('Premium', 19.99, 4, 'Ultra HD');
 
---INSERT INTO Movies VALUES('Title', 'Genre', ReleaseDate, Studio, director, movieid)
-INSERT INTO Movies VALUES('Forrest Gump', 'Drama/Romance', '1996-07-06', 'Paramount', 'Robert Zemeckis', 1);
-INSERT INTO Movies VALUES('Shrek 2', 'Comedy/Fantasy', '2004-05-19', 'Dreamworks', 'Andrew Adamson', 2);
-INSERT INTO Movies VALUES('Toy Story', 'Comedy/Family', '1995-11-19', 'Pixar', 'John Lasseter', 3);
-INSERT INTO Movies VALUES('Star Wars: Episode III - Revenge of the Sith', 'Adventure/Fantasy/Sci-Fi/Action', '2005-05-19', 'Lucasfilm', 'George Lucas', 4);
-INSERT INTO Movies VALUES('Toy Story 2', 'Comedy/Family', '1999-11-24', 'Pixar', 'John Lasseter', 5);
+--INSERT INTO Movies VALUES('Title', ReleaseDate, Studio, director, movieid)
+INSERT INTO Movies VALUES('Forrest Gump', '1996-07-06', 'Paramount', 'Robert Zemeckis', 1);
+INSERT INTO Movies VALUES('Shrek 2', '2004-05-19', 'Dreamworks', 'Andrew Adamson', 2);
+INSERT INTO Movies VALUES('Toy Story', '1995-11-19', 'Pixar', 'John Lasseter', 3);
+INSERT INTO Movies VALUES('Star Wars: Episode III - Revenge of the Sith', '2005-05-19', 'Lucasfilm', 'George Lucas', 4);
+INSERT INTO Movies VALUES('Toy Story 2', '1999-11-24', 'Pixar', 'John Lasseter', 5);
 
---INSERT INTO Shows VALUES('Title', 'Genre', 'ReleaseDate', 'Studio', 'Director', showid);
-INSERT INTO Shows VALUES('Stranger Things', 'Sci-Fi/Thriller', '2016-07-15', 'Netflix', 'Shawn Levy', 1);
-INSERT INTO Shows VALUES('The Mandalorian', 'Sci-Fi/Action/Adventure', '2019-11-12', 'Lucasfilm', 'Dave Filoni', 2);
-INSERT INTO Shows VALUES('The Book of Boba Fett', 'Sci-Fi/Action/Adventure', '2021-12-29', 'Lucasfilm', 'Jon Favreau', 3);
-INSERT INTO Shows VALUES('Narcos: Mexico', 'Crime/Drama', '2018-11-16', 'Netflix', 'Andi Baiz', 4);
-INSERT INTO Shows VALUES('Narcos', 'Crime/Drama', '2015-08-28', 'Netflix', 'José Padilha', 5);
+--INSERT INTO Shows VALUES('Title', 'ReleaseDate', 'Studio', 'Director', showid);
+INSERT INTO Shows VALUES('Stranger Things', '2016-07-15', 'Netflix', 'Shawn Levy', 1);
+INSERT INTO Shows VALUES('The Mandalorian', '2019-11-12', 'Lucasfilm', 'Dave Filoni', 2);
+INSERT INTO Shows VALUES('The Book of Boba Fett', '2021-12-29', 'Lucasfilm', 'Jon Favreau', 3);
+INSERT INTO Shows VALUES('Narcos: Mexico','2018-11-16', 'Netflix', 'Andi Baiz', 4);
+INSERT INTO Shows VALUES('Narcos', '2015-08-28', 'Netflix', 'José Padilha', 5);
 
 
 
@@ -202,6 +279,8 @@ INSERT INTO Actors VALUES('Alberto Ammann', 65);
 INSERT INTO Actors VALUES('Paulina Gaitán', 66);
 INSERT INTO Actors VALUES('Damián Alcázar', 67);
 INSERT INTO Actors VALUES('Francisco Denis', 68);
+
+
 
 --INSERT INTO MovieActors VALUES(movieid, actorid)
 INSERT INTO MovieActors VALUES(1, 1);--Forrest Gump
@@ -292,6 +371,7 @@ INSERT INTO Watchlist VALUES('pumagod', 2, NULL);
 INSERT INTO Watchlist VALUES('pumagod', 4, NULL);
 
 
+
 --SQL Statements
 
 --What Movies are comedies
@@ -343,8 +423,7 @@ INSERT INTO Watchlist VALUES('pumagod', 4, NULL);
 -- AND u_username = 'pumagod'
 -- AND m_releaseDate < '2005-01-01';
 
---What movies and shows have been released after the year 2000,
---have been added to Kidy101's watchlist, and have less than 9 actors?
+--What movies and shows have been released after the year 2000, have been added to Kidy101's watchlist, and have less than 9 actors?
 SELECT m_title, s_title
 FROM Movies, Shows, User, Watchlist, ShowActors, MovieActors
 WHERE m_movieid = w_movieid
@@ -354,3 +433,19 @@ AND m_releaseDate > '1999-12-12'
 AND s_releaseDate > '1999-12-12'
 GROUP BY m_title, s_title
 HAVING COUNT(ma_actorid) <= 8 AND COUNT(sa_actorid) <= 8;
+
+--How many movies are on both of the watchlists of users pumagod and Kidy101?
+SELECT m_title
+FROM Movies, User, Watchlist
+WHERE m_movieid = w_movieid
+AND u_username = w_username
+AND u_username = 'pumagod'
+AND u_username = 'Kidy101';
+
+--What movies are made by Pixar, are comedies, and feature Tom Hanks?
+SELECT m_title
+FROM Movies, Actors, MovieActors
+WHERE m_movieid = ma_movieid
+AND ma_actorid = a_actorid
+AND a_actorname LIKE "%Tom Hanks"
+AND m_
