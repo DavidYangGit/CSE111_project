@@ -69,7 +69,7 @@ From Subscription, User
 Where u_plan = sub_plan
 And u_username = 'Hetrotan';
 
---9. What shows have more than 7 actors?
+--9. What shows have more than 6 actors?
 SELECT DISTINCT s_title
 FROM Shows, Actors, ShowActors
 WHERE s_showid = sa_showid
@@ -85,15 +85,14 @@ AND u_username = w_username
 AND u_username = 'pumagod'
 AND m_releaseDate < '2005-01-01';
 
---11. What movies and shows have been released after the year 2000, have been added to Kidy101's watchlist, and have less than 9 actors?
-SELECT m_title
+--11. What movies and shows have been released after the year 2000, have been added to Kidy101's watchlist.
+SELECT  m_title
 FROM Movies, User, MovieActors, Watchlist
 WHERE m_movieid = w_movieid
 AND u_username = w_username
 AND u_username = 'Kidy101'
 AND m_releaseDate > '1999-12-12'
 GROUP BY m_title
-HAVING COUNT(ma_actorid) <= 8
 UNION
 SELECT s_title
 FROM Shows, User, ShowActors, Watchlist
@@ -101,8 +100,7 @@ WHERE s_showid = w_showid
 AND u_username = w_username
 AND u_username = 'Kidy101'
 AND s_releaseDate > '1999-12-12'
-GROUP BY s_title
-HAVING COUNT(sa_actorid) <= 8;
+GROUP BY s_title;
 
 
 --12. How many movies are on both of the watchlists of users pumagod and Kidy101?
@@ -137,9 +135,10 @@ WHERE u_plan = sub_plan;
 
 --15. What user(s) have a standard subscription plan and have a sci-fi show in their watchlist?
 SELECT u_username
-FROM User, Shows, ShowGenres, Subscription
-WHERE u_plan = sub_plan
-AND sub_plan = 'Standard'
+FROM User, Shows, ShowGenres, Genre, Watchlist
+WHERE u_plan = 'Standard'
+AND w_showid = s_showid
+AND w_username = u_username
 AND s_showid = sg_showid
 AND sg_genreid = g_genreid
 AND g_name = 'Sci-Fi';
@@ -150,7 +149,7 @@ FROM Movies, MovieActors, Actors
 WHERE m_movieid = ma_movieid
 AND ma_actorid = a_actorid
 AND m_director = 'John Lasseter'
-EXCEPT
+EXCEPT 
 SELECT a_actorname
 FROM Movies, MovieActors, Actors
 WHERE m_movieid = ma_movieid
@@ -158,19 +157,8 @@ AND ma_actorid = a_actorid
 AND m_director = 'John Lasseter'
 AND a_actorname = 'Tom Hanks';
 
---17. How many shows are produced by Lucasfilm?
-SELECT COUNT(*)
-FROM (
-	SELECT s_title
-	FROM Shows
-	WHERE s_studio = 'Lucasfilm');
 
---18. What movies are on more than one user's watchlist?
-SELECT m_title
-FROM Movies, Watchlist
-WHERE m_movieid = w_movieid
-GROUP BY m_title
-HAVING COUNT(w_movieid) > 1;  
+--17. 
 
 --Detete user 'savagecat' because he deactivated his account
 DELETE FROM User
