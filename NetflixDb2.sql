@@ -37,7 +37,7 @@ CREATE TABLE Subscription (
     sub_plan CHAR(50) NOT NULL,
     sub_price FLOAT,
     sub_maxviewers INTEGER,
-    sub_resolution CHAR(50) NOT NULL,
+    sub_resolution CHAR(50) NOT NULL
 );
 
 CREATE TABLE viewHistory (
@@ -422,6 +422,12 @@ WHERE a_actorid = ma_actorid
 AND m_movieid = ma_movieid
 AND a_actorname = 'Tom Hanks';
 
+--What movies does Pedro Pascal star in
+Select s_title
+From Shows, Actors, ShowActors
+WHERE a_actorid = sa_actorid
+AND s_showid = sa_showid
+AND a_actorname = 'Pedro Pascal';
 
 --What shows has user 'Kidy101' added to their watchlist
 Select s_title
@@ -436,3 +442,16 @@ From Movies, User, Watchlist
 WHERE m_movieid = w_movieid
 AND u_username = w_username
 AND u_username = 'pumagod';
+
+--What plan does user 'Hetrotan' have
+Select u_plan
+From User
+Where u_username = 'Hetrotan';
+
+--What does Hetrotans plan include
+
+Select sub_plan, sub_price, sub_maxviewers, sub_resolution
+From Subscription, User
+Where u_plan = sub_plan
+And u_username = 'Hetrotan';
+
