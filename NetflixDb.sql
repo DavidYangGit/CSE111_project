@@ -33,17 +33,17 @@ CREATE TABLE Subscription (
     sub_plan CHAR(50) NOT NULL,
     sub_price FLOAT,
     sub_maxviewers INTEGER,
-    sub_resolution CHAR(50) NOT NULL,
+    sub_resolution CHAR(50) NOT NULL
 );
 
 CREATE TABLE viewHistory (
-    vh_username CHAR(50) PRIMARY KEY
+    vh_username CHAR(50) PRIMARY KEY,
     vh_movieid INTEGER,
     vh_showid INTEGER
 );
 
 CREATE TABLE Watchlist (
-    w_username CHAR(50) PRIMARY KEY
+    w_username CHAR(50) PRIMARY KEY,
     w_movieid INTEGER,
     w_showid INTEGER
 );
@@ -78,11 +78,6 @@ CREATE TABLE Shows (
 );
 
 CREATE TABLE Directors (
-    d_director CHAR(50) NOT NULL,
-    d_age INTEGER
-);
-
-CREATE TABLE Directors (
     d_directorname CHAR(50) NOT NULL,
     d_directorid INTEGER
 );
@@ -95,12 +90,6 @@ CREATE TABLE Actors (
 CREATE TABLE Studios (
     s_studio CHAR(50) NOT NULL,
     s_address CHAR(50) NOT NULL
-);
-
-Create Table Watchlist (
-    w_username CHAR(50) NOT NULL,
-    w_movieid INTEGER,
-    w_showid INTEGER
 );
 
 --Following Will Populate Tables
@@ -355,3 +344,46 @@ From Movies, User, Watchlist
 WHERE m_movieid = w_movieid
 AND u_username = w_username
 AND u_username = 'pumagod';
+
+--What shows have more than 7 actors?
+-- SELECT DISTINCT s_title
+-- FROM Shows, Actors, ShowActors
+-- WHERE s_showid = sa_showid
+-- AND sa_actorid = a_actorid
+-- GROUP BY s_title
+-- HAVING COUNT(sa_actorid) > 6;
+
+--What movies has user 'pumagod' added to their watchlist that have been released before the year 2005?
+-- SELECT m_title
+-- FROM Movies, User, Watchlist
+-- WHERE m_movieid = w_movieid
+-- AND u_username = w_username
+-- AND u_username = 'pumagod'
+-- AND m_releaseDate < '2005-01-01';
+
+--What movies and shows have been released after the year 2000, have been added to Kidy101's watchlist, and have less than 9 actors?
+SELECT m_title, s_title
+FROM Movies, Shows, User, Watchlist, ShowActors, MovieActors
+WHERE m_movieid = w_movieid
+AND u_username = w_username
+AND u_username = 'Kidy101'
+AND m_releaseDate > '1999-12-12'
+AND s_releaseDate > '1999-12-12'
+GROUP BY m_title, s_title
+HAVING COUNT(ma_actorid) <= 8 AND COUNT(sa_actorid) <= 8;
+
+--How many movies are on both of the watchlists of users pumagod and Kidy101?
+SELECT m_title
+FROM Movies, User, Watchlist
+WHERE m_movieid = w_movieid
+AND u_username = w_username
+AND u_username = 'pumagod'
+AND u_username = 'Kidy101';
+
+--What movies are made by Pixar, are comedies, and feature Tom Hanks?
+SELECT m_title
+FROM Movies, Actors, MovieActors
+WHERE m_movieid = ma_movieid
+AND ma_actorid = a_actorid
+AND a_actorname LIKE "%Tom Hanks"
+AND m_
