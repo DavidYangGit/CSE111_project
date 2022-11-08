@@ -158,7 +158,19 @@ AND m_director = 'John Lasseter'
 AND a_actorname = 'Tom Hanks';
 
 
---17. 
+--17. How many shows are produced by Lucasfilm?
+SELECT COUNT(*)
+FROM (
+	SELECT s_title
+	FROM Shows
+	WHERE s_studio = 'Lucasfilm');
+
+--18. What movies are on more than one user's watchlist?
+SELECT m_title
+FROM Movies, Watchlist
+WHERE m_movieid = w_movieid
+GROUP BY m_title
+HAVING COUNT(w_movieid) > 1;  
 
 --Detete user 'savagecat' because he deactivated his account
 DELETE FROM User
