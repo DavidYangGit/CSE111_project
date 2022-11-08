@@ -322,8 +322,10 @@ INSERT INTO Watchlist VALUES('pumagod', 4, NULL);
 
 --What Movies are comedies
 Select m_title
-From Movies
-Where m_genre LIKE '%Comedy%';
+From Movies, Genre, MovieGenres
+Where m_movieid = mg_movieid
+AND g_id = mg_id
+AND mg_id = 1;
 
 --What Actors are in Shrek 2
 Select a_actorname
