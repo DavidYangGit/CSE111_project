@@ -7,11 +7,9 @@ DROP TABLE Movies;
 DROP TABLE Shows;
 DROP TABLE viewHistory;
 DROP TABLE Watchlist;
-DROP TABLE Directors;
 DROP TABLE Actors;
 DROP TABLE MovieActors;
 DROP TABLE ShowActors;
-DROP TABLE Studios;
 DROP TABLE Genre;
 DROP TABLE MovieGenres;
 DROP TABLE ShowGenres;
@@ -41,7 +39,7 @@ CREATE TABLE Subscription (
 );
 
 CREATE TABLE viewHistory (
-    vh_username CHAR(50) PRIMARY KEY
+    vh_username CHAR(50) PRIMARY KEY,
     vh_movieid INTEGER,
     vh_showid INTEGER
 );

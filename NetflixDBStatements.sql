@@ -69,6 +69,77 @@ From Subscription, User
 Where u_plan = sub_plan
 And u_username = 'Hetrotan';
 
+--10. What shows have more than 7 actors?
+SELECT DISTINCT s_title
+FROM Shows, Actors, ShowActors
+WHERE s_showid = sa_showid
+AND sa_actorid = a_actorid
+GROUP BY s_title
+HAVING COUNT(sa_actorid) > 6;
+
+--11. What movies has user 'pumagod' added to their watchlist that have been released before the year 2005?
+SELECT m_title
+FROM Movies, User, Watchlist
+WHERE m_movieid = w_movieid
+AND u_username = w_username
+AND u_username = 'pumagod'
+AND m_releaseDate < '2005-01-01';
+
+--12. What movies and shows have been released after the year 2000, have been added to Kidy101's watchlist, and have less than 9 actors?
+-- SELECT m_title, s_title
+-- FROM Movies, Shows, User, Watchlist, ShowActors, MovieActors
+-- WHERE m_movieid = w_movieid
+-- AND u_username = w_username
+-- AND u_username = 'Kidy101'
+-- AND m_releaseDate > '1999-12-12'
+-- AND s_releaseDate > '1999-12-12'
+-- GROUP BY m_title, s_title
+-- HAVING COUNT(ma_actorid) <= 8 AND COUNT(sa_actorid) <= 8;
+
+SELECT m_title
+FROM Movies, User, MovieActors, Watchlist
+WHERE m_movieid = w_movieid
+AND u_username = w_username
+AND u_username = 'Kidy101'
+AND m_releaseDate > '1999-12-12'
+GROUP BY m_title
+HAVING COUNT(ma_actorid) <= 8
+UNION
+SELECT s_title
+FROM Shows, User, ShowActors, Watchlist
+WHERE m_movieid = w_movieid
+AND u_username = w_username
+AND u_username = 'Kidy101'
+AND s_releaseDate > '1999-12-12'
+GROUP BY s_title
+HAVING COUNT(sa_actorid) <= 8;
+
+
+--13. How many movies are on both of the watchlists of users pumagod and Kidy101?
+SELECT m_title
+FROM Movies, User, Watchlist
+WHERE m_movieid = w_movieid
+AND u_username = w_username
+AND u_username = 'pumagod'
+INTERSECT
+SELECT m_title
+FROM Movies, User, Watchlist
+WHERE m_movieid = w_movieid
+AND u_username = w_username
+AND u_username = 'Kidy101';
+
+--14. What movies are made by Pixar, are comedies, and feature Tom Hanks?
+SELECT m_title
+FROM Movies, Actors, MovieActors
+WHERE m_movieid = ma_movieid
+AND mg_movieid = m_movieid
+AND ma_movieid = mg_movieid
+AND mg_genreid = g_genreid
+AND ma_actorid = a_actorid
+AND a_actorname LIKE '%Tom Hanks'
+AND g_name LIKE '%Comedy'
+AND m_studio LIKE '%Pixar';
+
 --Detete user 'savagecat' because he deactivated his account
 DELETE FROM User
 WHERE u_username = 'savagecat';
