@@ -33,17 +33,17 @@ CREATE TABLE Subscription (
     sub_plan CHAR(50) NOT NULL,
     sub_price FLOAT,
     sub_maxviewers INTEGER,
-    sub_resolution CHAR(50) NOT NULL,
+    sub_resolution CHAR(50) NOT NULL
 );
 
 CREATE TABLE viewHistory (
-    vh_username CHAR(50) PRIMARY KEY
+    vh_username CHAR(50) PRIMARY KEY,
     vh_movieid INTEGER,
     vh_showid INTEGER
 );
 
 CREATE TABLE Watchlist (
-    w_username CHAR(50) PRIMARY KEY
+    w_username CHAR(50) PRIMARY KEY,
     w_movieid INTEGER,
     w_showid INTEGER
 );
@@ -80,10 +80,6 @@ CREATE TABLE Shows (
 CREATE TABLE Directors (
     d_director CHAR(50) NOT NULL,
     d_age INTEGER
-);
-
-CREATE TABLE Directors (
-    d_directorname CHAR(50) NOT NULL,
     d_directorid INTEGER
 );
 
@@ -95,12 +91,6 @@ CREATE TABLE Actors (
 CREATE TABLE Studios (
     s_studio CHAR(50) NOT NULL,
     s_address CHAR(50) NOT NULL
-);
-
-Create Table Watchlist (
-    w_username CHAR(50) NOT NULL,
-    w_movieid INTEGER,
-    w_showid INTEGER
 );
 
 --Following Will Populate Tables
