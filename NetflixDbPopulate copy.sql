@@ -48,7 +48,8 @@ CREATE TABLE viewHistory (
 );
 
 -- CREATE TABLE Watchlist (
---     w_username VARCHAR PRIMARY KEY
+--     id INTEGER PRIMARY KEY,
+--     w_email VARCHAR,
 --     w_movieid INTEGER,
 --     w_showid INTEGER
 -- );
@@ -204,78 +205,78 @@ INSERT INTO shows VALUES(5, 'Narcos', '2015-08-28', 'Netflix', 'José Padilha', 
 
 
 --INSERT INTO Actors VALUES(ActorName, Actorid)
-INSERT INTO Actors VALUES('Tom Hanks', 1);--Forrest Gump
-INSERT INTO Actors VALUES('Robert Wright', 2);
-INSERT INTO Actors VALUES('Gary Sinise', 3);
-INSERT INTO Actors VALUES('Mykelti Williamson', 4);
-INSERT INTO Actors VALUES('Sally Field', 5);
-INSERT INTO Actors VALUES('Mike Myers', 6);--Shrek 2
-INSERT INTO Actors VALUES('Eddie Murphy', 7);
-INSERT INTO Actors VALUES('Cameron Diaz', 8);
-INSERT INTO Actors VALUES('Julie Andrews', 9);
-INSERT INTO Actors VALUES('Antonio Banderas', 10);
-INSERT INTO Actors VALUES('John Cleese', 11);
-INSERT INTO Actors VALUES('Rupert Everett', 12);
-INSERT INTO Actors VALUES('Jennifer Saunders', 13);
+INSERT INTO Actors VALUES(1, 'Tom Hanks', 1);--Forrest Gump
+INSERT INTO Actors VALUES(2, 'Robert Wright', 2);
+INSERT INTO Actors VALUES(3, 'Gary Sinise', 3);
+INSERT INTO Actors VALUES(4, 'Mykelti Williamson', 4);
+INSERT INTO Actors VALUES(5, 'Sally Field', 5);
+INSERT INTO Actors VALUES(6, 'Mike Myers', 6);--Shrek 2
+INSERT INTO Actors VALUES(7, 'Eddie Murphy', 7);
+INSERT INTO Actors VALUES(8, 'Cameron Diaz', 8);
+INSERT INTO Actors VALUES(9, 'Julie Andrews', 9);
+INSERT INTO Actors VALUES(10, 'Antonio Banderas', 10);
+INSERT INTO Actors VALUES(11, 'John Cleese', 11);
+INSERT INTO Actors VALUES(12, 'Rupert Everett', 12);
+INSERT INTO Actors VALUES(13, 'Jennifer Saunders', 13);
 --INSERT INTO Actors VALUES('Tom Hanks', 1);--Toy Story
-INSERT INTO Actors VALUES('Tim Allen', 14);
-INSERT INTO Actors VALUES('Don Rickles', 15);
-INSERT INTO Actors VALUES('Jim Varney', 16);
-INSERT INTO Actors VALUES('Wallace Shawn', 17);
-INSERT INTO Actors VALUES('John Ratzenberger', 18);
-INSERT INTO Actors VALUES('Annie Potts', 19);
-INSERT INTO Actors VALUES('John Morris', 20);
-INSERT INTO Actors VALUES('Erik von Detten', 21);
-INSERT INTO Actors VALUES('Ewan McGregor', 22);--Star Wars Episode 3
-INSERT INTO Actors VALUES('Natalie Portman', 23);
-INSERT INTO Actors VALUES('Hayden Christensen', 24);
-INSERT INTO Actors VALUES('Ian McDiarmid', 25);
-INSERT INTO Actors VALUES('Samuel L. Jackson', 26);
-INSERT INTO Actors VALUES('Christopher Lee', 27);
-INSERT INTO Actors VALUES('Anthony Daniels', 28);
-INSERT INTO Actors VALUES('Kenny Baker', 29);
-INSERT INTO Actors VALUES('Frank Oz', 30);
+INSERT INTO Actors VALUES(14, 'Tim Allen', 14);
+INSERT INTO Actors VALUES(15, 'Don Rickles', 15);
+INSERT INTO Actors VALUES(16, 'Jim Varney', 16);
+INSERT INTO Actors VALUES(17, 'Wallace Shawn', 17);
+INSERT INTO Actors VALUES(18, 'John Ratzenberger', 18);
+INSERT INTO Actors VALUES(19, 'Annie Potts', 19);
+INSERT INTO Actors VALUES(20, 'John Morris', 20);
+INSERT INTO Actors VALUES(21, 'Erik von Detten', 21);
+INSERT INTO Actors VALUES(22, 'Ewan McGregor', 22);--Star Wars Episode 3
+INSERT INTO Actors VALUES(23, 'Natalie Portman', 23);
+INSERT INTO Actors VALUES(24, 'Hayden Christensen', 24);
+INSERT INTO Actors VALUES(25, 'Ian McDiarmid', 25);
+INSERT INTO Actors VALUES(26, 'Samuel L. Jackson', 26);
+INSERT INTO Actors VALUES(27, 'Christopher Lee', 27);
+INSERT INTO Actors VALUES(28, 'Anthony Daniels', 28);
+INSERT INTO Actors VALUES(29, 'Kenny Baker', 29);
+INSERT INTO Actors VALUES(30, 'Frank Oz', 30);
 --INSERT INTO Actors VALUES('Tom Hanks', 1);--Toy Story 2
 --INSERT INTO Actors VALUES('Tim Allen', 14);
-INSERT INTO Actors VALUES('Winona Ryder', 31);--Stranger Things
-INSERT INTO Actors VALUES('David Harbour', 32);
-INSERT INTO Actors VALUES('Finn Wolfhard', 33);
-INSERT INTO Actors VALUES('Millie Bobby Brown', 34);
-INSERT INTO Actors VALUES('Gaten Matarazzo', 35);
-INSERT INTO Actors VALUES('Caleb McLaughlin', 36);
-INSERT INTO Actors VALUES('Natalia Dyer', 37);
-INSERT INTO Actors VALUES('Charlie Heaton', 38);
-INSERT INTO Actors VALUES('Cara Buono', 39);
-INSERT INTO Actors VALUES('Matthew Modine', 40);
-INSERT INTO Actors VALUES('Noah Schnapp', 41);
-INSERT INTO Actors VALUES('Sadie Sink', 42);
-INSERT INTO Actors VALUES('Joe Keery', 43);
-INSERT INTO Actors VALUES('Dacre Montgomery', 44);
-INSERT INTO Actors VALUES('Sean Astin', 45);
-INSERT INTO Actors VALUES('Paul Reiser', 46);
-INSERT INTO Actors VALUES('Maya Hawke', 47);
-INSERT INTO Actors VALUES('Priah Ferguson', 48);
-INSERT INTO Actors VALUES('Brett Gellam', 49);
-INSERT INTO Actors VALUES('Pedro Pascal', 50);--The Mandalorian
-INSERT INTO Actors VALUES('Carl Weathers', 51);
-INSERT INTO Actors VALUES('Giancarlo Esposito', 52);
-INSERT INTO Actors VALUES('Gina Carano', 53);
-INSERT INTO Actors VALUES('Temuera Morrison', 54);
-INSERT INTO Actors VALUES('Ming-Na Wen', 55);
-INSERT INTO Actors VALUES('Emily Swallow', 56);
-INSERT INTO Actors VALUES('Rosario Dawson', 57);
-INSERT INTO Actors VALUES('Diego Luna', 58);--Narcos:Mexico
-INSERT INTO Actors VALUES('Micheal Pena', 59);
-INSERT INTO Actors VALUES('Teresa Ruiz', 60);
-INSERT INTO Actors VALUES('Tencho Huerta', 61);
-INSERT INTO Actors VALUES('Alejandro Eda', 62);
+INSERT INTO Actors VALUES(31, 'Winona Ryder', 31);--Stranger Things
+INSERT INTO Actors VALUES(32, 'David Harbour', 32);
+INSERT INTO Actors VALUES(33, 'Finn Wolfhard', 33);
+INSERT INTO Actors VALUES(34, 'Millie Bobby Brown', 34);
+INSERT INTO Actors VALUES(35, 'Gaten Matarazzo', 35);
+INSERT INTO Actors VALUES(36, 'Caleb McLaughlin', 36);
+INSERT INTO Actors VALUES(37, 'Natalia Dyer', 37);
+INSERT INTO Actors VALUES(38, 'Charlie Heaton', 38);
+INSERT INTO Actors VALUES(39, 'Cara Buono', 39);
+INSERT INTO Actors VALUES(40, 'Matthew Modine', 40);
+INSERT INTO Actors VALUES(41, 'Noah Schnapp', 41);
+INSERT INTO Actors VALUES(42, 'Sadie Sink', 42);
+INSERT INTO Actors VALUES(43, 'Joe Keery', 43);
+INSERT INTO Actors VALUES(44, 'Dacre Montgomery', 44);
+INSERT INTO Actors VALUES(45, 'Sean Astin', 45);
+INSERT INTO Actors VALUES(46, 'Paul Reiser', 46);
+INSERT INTO Actors VALUES(47, 'Maya Hawke', 47);
+INSERT INTO Actors VALUES(48, 'Priah Ferguson', 48);
+INSERT INTO Actors VALUES(49, 'Brett Gellam', 49);
+INSERT INTO Actors VALUES(50, 'Pedro Pascal', 50);--The Mandalorian
+INSERT INTO Actors VALUES(51, 'Carl Weathers', 51);
+INSERT INTO Actors VALUES(52, 'Giancarlo Esposito', 52);
+INSERT INTO Actors VALUES(53, 'Gina Carano', 53);
+INSERT INTO Actors VALUES(54, 'Temuera Morrison', 54);
+INSERT INTO Actors VALUES(55, 'Ming-Na Wen', 55);
+INSERT INTO Actors VALUES(56, 'Emily Swallow', 56);
+INSERT INTO Actors VALUES(57, 'Rosario Dawson', 57);
+INSERT INTO Actors VALUES(58, 'Diego Luna', 58);--Narcos:Mexico
+INSERT INTO Actors VALUES(59, 'Micheal Pena', 59);
+INSERT INTO Actors VALUES(60, 'Teresa Ruiz', 60);
+INSERT INTO Actors VALUES(61, 'Tencho Huerta', 61);
+INSERT INTO Actors VALUES(62, 'Alejandro Eda', 62);
 --INSERT INTO Actors VALUES('Pedro Pascal', 50);--Narcos
-INSERT INTO Actors VALUES('Wagner Mora', 63);
-INSERT INTO Actors VALUES('Boyd Holbrook', 64);
-INSERT INTO Actors VALUES('Alberto Ammann', 65);
-INSERT INTO Actors VALUES('Paulina Gaitán', 66);
-INSERT INTO Actors VALUES('Damián Alcázar', 67);
-INSERT INTO Actors VALUES('Francisco Denis', 68);
+INSERT INTO Actors VALUES(63, 'Wagner Mora', 63);
+INSERT INTO Actors VALUES(64, 'Boyd Holbrook', 64);
+INSERT INTO Actors VALUES(65, 'Alberto Ammann', 65);
+INSERT INTO Actors VALUES(66, 'Paulina Gaitán', 66);
+INSERT INTO Actors VALUES(67, 'Damián Alcázar', 67);
+INSERT INTO Actors VALUES(68, 'Francisco Denis', 68);
 
 
 
@@ -320,7 +321,7 @@ INSERT INTO MovieActors VALUES(4, 30);
 INSERT INTO MovieActors VALUES(5, 1);--Toy Story 2
 INSERT INTO MovieActors VALUES(5, 14);
 
---INSERT INTO MovieActors VALUES(showeid, actorid)
+--INSERT INTO MovieActors VALUES(showid, actorid)
 INSERT INTO ShowActors VALUES(1, 31);--Stranger Things
 INSERT INTO ShowActors VALUES(1, 32);
 INSERT INTO ShowActors VALUES(1, 33);
