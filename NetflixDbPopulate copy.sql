@@ -134,6 +134,9 @@ INSERT INTO Genre VALUES(9,'Horror');
 INSERT INTO Genre VALUES(10,'Romance');
 INSERT INTO Genre VALUES(11,'Sci-Fi');
 INSERT INTO Genre VALUES(12,'Thriller');
+-- .mode csv
+-- .separator |
+-- .import data/Genre.tbl Genre
 
 
 --Insert Into MovieGenres VALUES(genre id, movie id);
