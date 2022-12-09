@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Showgenres</h1>
+
+<div id="showgenres">
+  <% @showgenres.each do |showgenre| %>
+    <%= render showgenre %>
+    <p>
+      <%= link_to "Show this showgenre", showgenre %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New showgenre", new_showgenre_path %>

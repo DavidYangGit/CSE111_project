@@ -1,0 +1,69 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Shows</h1>
+
+  <style>
+    table,
+    th,
+    /* setting the text-align property to center*/
+    th {
+        /* padding: 5px; */
+        text-align: center;
+      }
+  </style>
+
+  <%# This search is to filter the results in th shows index page based off of user input %>
+  <h4>Search by Title</h4>
+    <%= form_tag(shows_path, method: :get) do %>
+      <%= text_field_tag(:stsearch, params[:stsearch]) %>
+      <%= submit_tag ("Search") %>
+    <% end %>
+
+ <h4>Search by Studio</h4>
+    <%= form_tag(shows_path, method: :get) do %>
+      <%= text_field_tag(:sssearch, params[:sssearch]) %>
+      <%= submit_tag ("Search") %>
+    <% end %>
+
+ <h4>Search by Director</h4>
+    <%= form_tag(shows_path, method: :get) do %>
+      <%= text_field_tag(:sdsearch, params[:sdsearch]) %>
+      <%= submit_tag ("Search") %>
+    <% end %>
+
+  <h4>Search by Genre</h4>
+    <%= form_tag(shows_path, method: :get) do %>
+      <%= text_field_tag(:sgsearch, params[:sgsearch]) %>
+      <%= submit_tag ("Search") %>
+    <% end %>
+
+ <h4>Search by Actor</h4>
+    <%= form_tag(shows_path, method: :get) do %>
+      <%= text_field_tag(:sasearch, params[:sasearch]) %>
+      <%= submit_tag ("Search") %>
+    <% end %>
+
+ <table class="table table-bordered table-hover">
+    <thead class="table-dark">
+      <tr>
+        <th>Title</th>
+        <th colspan="1"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <% @shows.each do |show| %>
+        <%#= render movie %>
+        
+         <td><%= show.s_title %></td>
+        <td>
+          <%= link_to "Show Info", show, class:"btn btn-danger" %>          
+        </td>
+      
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+<%= link_to "New Show", new_show_path %>
