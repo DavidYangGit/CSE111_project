@@ -1,0 +1,27 @@
+<%= form_with(model: actor) do |form| %>
+  <% if actor.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(actor.errors.count, "error") %> prohibited this actor from being saved:</h2>
+
+      <ul>
+        <% actor.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :a_actorname, style: "display: block" %>
+    <%= form.text_field :a_actorname %>
+  </div>
+
+  <div>
+    <%= form.label :a_actorid, style: "display: block" %>
+    <%= form.number_field :a_actorid %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

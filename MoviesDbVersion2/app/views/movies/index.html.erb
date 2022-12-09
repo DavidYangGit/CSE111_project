@@ -1,0 +1,72 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Movies</h1>
+
+  <style>
+    table,
+    th,
+    /* setting the text-align property to center*/
+    th {
+        /* padding: 5px; */
+        text-align: center;
+      }
+  </style>
+
+<%# This search is to filter the results in th emovies index page based off of user input %>
+  <h4>Search by Title</h4>
+    <%= form_tag(movies_path, method: :get) do %>
+      <%= text_field_tag(:mtsearch, params[:mtsearch]) %>
+      <%= submit_tag ("Search") %>
+    <% end %>
+
+ <h4>Search by Studio</h4>
+    <%= form_tag(movies_path, method: :get) do %>
+      <%= text_field_tag(:mssearch, params[:mssearch]) %>
+      <%= submit_tag ("Search") %>
+    <% end %>
+
+ <h4>Search by Director</h4>
+    <%= form_tag(movies_path, method: :get) do %>
+      <%= text_field_tag(:mdsearch, params[:mdsearch]) %>
+      <%= submit_tag ("Search") %>
+    <% end %>
+
+  <h4>Search by Genre</h4>
+    <%= form_tag(movies_path, method: :get) do %>
+      <%= text_field_tag(:mgsearch, params[:mgsearch]) %>
+      <%= submit_tag ("Search") %>
+    <% end %>
+
+ <h4>Search by Actor</h4>
+    <%= form_tag(movies_path, method: :get) do %>
+      <%= text_field_tag(:masearch, params[:masearch]) %>
+      <%= submit_tag ("Search") %>
+    <% end %>
+
+
+ 
+
+ <table class="table table-bordered table-hover">
+    <thead class="table-dark">
+      <tr>
+        <th>Title</th>
+        <th colspan="1"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <% @movies.each do |movie| %>
+        <%#= render movie %>
+        
+         <td><%= movie.m_title %></td>
+        <td>
+          <%= link_to "Movie Info", movie, class:"btn btn-danger" %>          
+        </td>
+      
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+<%= link_to "New movie", new_movie_path %>

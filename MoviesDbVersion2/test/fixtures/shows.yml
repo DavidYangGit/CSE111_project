@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  s_title: MyString
+  s_releaseDate: 2022-12-03
+  s_studio: MyString
+  s_director: MyString
+  s_showid: 1
+
+two:
+  s_title: MyString
+  s_releaseDate: 2022-12-03
+  s_studio: MyString
+  s_director: MyString
+  s_showid: 1

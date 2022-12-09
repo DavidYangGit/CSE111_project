@@ -1,0 +1,39 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Genres</h1>
+
+  <style>
+    table,
+    th,
+    /* setting the text-align property to center*/
+    th {
+        /* padding: 5px; */
+        text-align: center;
+      }
+  </style>
+
+ <table class="table table-bordered table-hover">
+    <thead class="table-dark">
+      <tr>
+        <th>Genre</th>
+        <th colspan="1"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <% @genres.each do |genre| %>
+        <%#= render genre %>
+        
+         <td><%= genre.g_genrename %></td>
+        <td>
+          <%= link_to "Genre Info", genre, class:"btn btn-danger" %>          
+        </td>
+      
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+<%= link_to "New Genre", new_genre_path %>
+

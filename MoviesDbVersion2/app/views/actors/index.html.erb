@@ -1,0 +1,38 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Actors</h1>
+
+  <style>
+    table,
+    th,
+    /* setting the text-align property to center*/
+    th {
+        /* padding: 5px; */
+        text-align: center;
+      }
+  </style>
+
+ <table class="table table-bordered table-hover">
+    <thead class="table-dark">
+      <tr>
+        <th>Name</th>
+        <th colspan="1"></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <tr>
+        <% @actors.each do |actor| %>
+        <%#= render actor %>
+        
+         <td><%= actor.a_actorname %></td>
+        <td>
+          <%= link_to "Actor Info", actor, class:"btn btn-danger" %>          
+        </td>
+      
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+<%= link_to "New actor", new_actor_path %>

@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @showactor %>
+
+<div>
+  <%= link_to "Edit this showactor", edit_showactor_path(@showactor) %> |
+  <%= link_to "Back to showactors", showactors_path %>
+
+  <%= button_to "Destroy this showactor", @showactor, method: :delete %>
+</div>
